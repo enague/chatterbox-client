@@ -4,6 +4,8 @@ var app = {
   messages: [],
   rooms: {},
   friends: {},
+  objectIds: {},
+  username: window.location.search.substring(10),
   //friendname: true
   
   
@@ -21,6 +23,7 @@ var app = {
       contentType: 'application/json',
       success: function (data) {
         console.log('chatterbox: Message sent', data);
+        app.fetch();
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -34,17 +37,17 @@ var app = {
       // This is the url you should use to communicate with the parse API server.
       url: app.server,
       type: 'GET',
-      //NEED TO GET NEW DATA
-      // data: data,
+      data: {order: '-createdAt',
+    },
       contentType: 'application/json',
       success: function (data) {
-        // console.log(data);
         if (app.messages.length === 0) {
-          app.messages = data.results;
+          app.messages = data.results.reverse();
           
           //render all messages and rooms
           _.each(app.messages, function(message) {
             app.renderMessage(message);
+            app.objectIds[message.objectId] = message.objectId;
             
             var roomName = message.roomname;
             
@@ -54,11 +57,19 @@ var app = {
               app.renderRoom(roomName);
             }
           });
-
-        }
-        debugger;
-        app.filterRoom('lobby');
+        } else {
+          //if you send a message refetch data
+          _.each(data.results, function(message) {
+            var objId = message.objectId;
+            if (app.objectIds[objId] === undefined) {
+              app.objectIds[objId] = objId;
+              app.messages.push(message);
+              app.renderMessage(message);
+            }
+          })
           
+        }
+        app.friended();  
       },
       error: function (data) {
         // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
@@ -73,13 +84,13 @@ var app = {
   
   renderMessage: function(message) {
     //create node
-    messageDiv = $(`<div id="messageDiv">
+    messageDiv = $(`<div class="messageDiv" id="${message.objectId}">
                       <div id="userName">${message.username}</div>
                       <div id="message">${message.text}</div>
                     </div>`);
    
     //append node
-    $('#chats').append(messageDiv);
+    $('#chats').prepend(messageDiv);
   },
   
   renderRoom: function(roomName) {
@@ -97,6 +108,41 @@ var app = {
         app.renderMessage(message);
       }
     });
+  },
+  
+  handleUsernameClick: function(username, element) {
+    console.log('called');
+    console.log(element);
+    if (app.friends[username] === undefined || app.friends[username] === false) {
+      app.friends[username] = true;
+    } else {
+      app.friends[username] = false;
+    }
+    
+    app.friended(username);
+  },
+  
+  friended: function(username) {
+    var friends = app.friends;
+    
+    _.each(friends, function(friended, friend) {
+      
+      var bool = friended;
+      
+      _.each(app.messages, function(message){
+        
+        if (bool && message.username === friend) {
+          $('#'+message.objectId).addClass('friend');
+        } else if (!bool && message.username === friend) {
+          $('#'+message.objectId).removeClass('friend');
+        }
+      });
+    })
+  },
+  
+  refreshPage: function(roomname) {
+    app.fetch();
+    app.filterRoom(roomname);
   }
 };
 

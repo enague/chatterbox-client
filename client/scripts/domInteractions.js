@@ -14,22 +14,16 @@ $(document).ready(function() {
     var element = $(event.target);
     var username = element[0].innerHTML;
     
-    
-    if (app.friends[username] === undefined || app.friends[username] === false) {
-      app.friends[username] = true;
-    } else {
-      app.friends[username] = false;
-      console.log(element[0].innerHTML);
-    }
-    
+    app.handleUsernameClick(username, event);
   });
   
   //SUBMIT BUTTON
   $('#send').on('click', function(event) {
     //access app.send with a message
+    
     var message = {
-      username: 'EricSam',
-      room: $("#roomSelect :selected").text(),
+      username: app.username,
+      roomname: $("#roomSelect :selected").text().trim(),
       text: $("#input")[0].value
     }
     
@@ -40,7 +34,7 @@ $(document).ready(function() {
   
   $('#filter').on('click', function(event) {
     //access app.send with a message
-    var room = $("#roomSelect :selected").text()
+    var room = $("#roomSelect :selected").text();
     
     app.filterRoom(room);
   });
@@ -55,4 +49,11 @@ $(document).ready(function() {
     $(event.target).removeClass('hover-username');
     
   });
+  
+  $('#refresh').on('click', function(event) {
+    //call refresh page
+    var roomname = $("#roomSelect :selected").text();
+    app.refreshPage(roomname);
+  });
+  
 });

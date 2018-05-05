@@ -105,7 +105,7 @@ form input[type=text] {
     background-color: #0090da;
 }
 
-#messageDiv {
+.messageDiv {
     background-color: lightgrey;
     border-radius: 10px;
     margin: 10px ;
@@ -126,4 +126,13 @@ form input[type=text] {
 .hover-username {
     color: red;
 }
+
+#refresh {
+    float: right;
+}
+
+.friend {
+    background-color: lightblue;
+}
+
 

@@ -121,7 +121,7 @@ describe('chatterbox', function() {
         app.init();
           
         //changed #main to #chats because chats is where our usernames are.
-        $('#chats').find('.username').trigger('click');
+        $('#chats').find('#userName').trigger('click');
         expect(app.handleUsernameClick.called).to.be.true;
 
         app.handleUsernameClick.restore();
