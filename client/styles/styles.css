@@ -3,6 +3,7 @@ body {
     text-align: center;
     padding: 0 25px;
     font-family: arial, sans-serif;
+    background-image: url('../images/background.jpg');
 }
 
 #main {
@@ -77,6 +78,7 @@ form input[type=text] {
 }
 
 .chat {
+    
     padding: 5px;
     margin-bottom: 5px;
     background-color: #eee;
@@ -114,25 +116,118 @@ form input[type=text] {
 }
 
 #userName {
+    font-family: 'Titan One', cursive;
+    font-size: 25px;
     margin: 3px;
     font-weight: bold;
 }
 
 #message {
+    font-family: 'Caveat', cursive;
+    font-size: 25px;
     margin: 10px;
     word-wrap: break-word;
 }
 
 .hover-username {
-    color: red;
+    cursor: pointer;
+    color: grey;
+}
+
+#input {
+    width: 51%
 }
 
 #refresh {
-    float: right;
+    cursor: pointer;
+    background-color: #513C64;
+    color: #ffffff;
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    height: 25px;
+    outline: none;
+}
+#refresh:hover {
+    filter: brightness(90%);
+}
+
+#add {
+    cursor: pointer;
+    background-color: #EDD530;
+    color: #ffffff;
+    display: block;
+    margin-top: 30px;
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    height: 25px;
+    outline: none;
+}
+#add:hover {
+    filter: brightness(90%);
+}
+
+#roomInput {
+    display: inline;
+}
+
+#roomSelect {
+    cursor: pointer;
 }
 
 .friend {
-    background-color: lightblue;
+    background-color: #1eb5df;
 }
+
+#send {
+    background-color:#44c767;
+    -moz-border-radius:14px;
+    -webkit-border-radius:14px;
+    border-radius:14px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    padding:1px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+#send:hover {
+    background-color:#5cbf2a;
+}
+#send:active {
+    position:relative;
+    top:1px;
+}
+
+#filter {
+    background-color:#99ccff;
+    -moz-border-radius:14px;
+    -webkit-border-radius:14px;
+    border-radius:14px;
+    border:1px solid #99ccff;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:17px;
+    padding:1px 31px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #2f6627;
+}
+#filter:hover {
+    filter: brightness(90%);
+}
+#filter:active {
+    position:relative;
+    top:1px;
+}
+
+
 
 

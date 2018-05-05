@@ -6,11 +6,10 @@ var app = {
   friends: {},
   objectIds: {},
   username: window.location.search.substring(10),
-  //friendname: true
-  
+  added: false,
+
   
   init: function() {
-    // debugger;
     app.fetch();
   },
   
@@ -52,7 +51,7 @@ var app = {
             var roomName = message.roomname;
             
             //check if we have it in our rooms array if not add and append it
-            if (app.rooms[roomName] === undefined & roomName !== 'undefined' & roomName !== ' ') {
+            if (app.rooms[roomName] === undefined) {
               app.rooms[roomName] = roomName;
               app.renderRoom(roomName);
             }
@@ -84,9 +83,13 @@ var app = {
   
   renderMessage: function(message) {
     //create node
+    
+    // var username = app.escapeHTML(message.username);
+    var text = app.escapeHTML(message.text);
+    
     messageDiv = $(`<div class="messageDiv" id="${message.objectId}">
                       <div id="userName">${message.username}</div>
-                      <div id="message">${message.text}</div>
+                      <div id="message">${text}</div>
                     </div>`);
    
     //append node
@@ -111,8 +114,6 @@ var app = {
   },
   
   handleUsernameClick: function(username, element) {
-    console.log('called');
-    console.log(element);
     if (app.friends[username] === undefined || app.friends[username] === false) {
       app.friends[username] = true;
     } else {
@@ -143,7 +144,27 @@ var app = {
   refreshPage: function(roomname) {
     app.fetch();
     app.filterRoom(roomname);
+  },
+  
+  escapeHTML: function(str) {
+     str = str + "''";
+     var out = "''";
+     for(var i=0; i<str.length; i++) {
+         if(str[i] === '<') {
+             out += '&amp;lt;';
+         } else if(str[i] === '>') {
+             out += '&amp;gt;';
+         } else if(str[i] === '"') {
+             out += '&amp;quot;';                        
+         } else {
+             out += str[i];
+         }
+     }
+     return out;                    
   }
+  
+  
+  
 };
 
 app.init();
