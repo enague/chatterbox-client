@@ -88,3 +88,18 @@ form input[type=text] {
     background-color: #0090da;
 }
 
+#messageDiv {
+    background-color: lightgrey;
+    border-radius: 10px;
+    margin: 10px ;
+}
+
+#username {
+    margin: 10px;
+}
+
+#message {
+    margin: 10px;
+}
+
+

@@ -7,6 +7,7 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -21,12 +22,25 @@
     <!-- your scripts -->
     <script src="env/config.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/domInteractions.js"></script>
   </head>
   <body>
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
+      Room:
+      <select id="roomSelect">
+        
+      </select>
+      <br>
+      <input>
+        
+      </input>
+      <button>
+        Submit
+      </button>
     </div>
-    <div id="chats"></div>
+    <div id="chats">
+    </div>
   </body>
 </html>
